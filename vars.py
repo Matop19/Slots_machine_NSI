@@ -1,2 +1,4 @@
 seed = 0
-nextTenSlots = []
+numberOfSlotsPerRow = 3
+numberOfRows = 3
+nextTenSlotsRow = []
