@@ -11,8 +11,15 @@ def GenerateNextXSlots(numberOfSlotsPerRow, numberOfRows):
 		nextRows.append(tuple(row))
 	return nextRows
 
-
-
-if __name__ == "__main__":
-	nextTenSlots = GenerateNextXSlots(5, 5)
-	print(nextTenSlots)
+def BetCoins(betAmount, currentMoney):
+	#FORMAT : (STATUS,MONEYTOPAY)
+	if(betAmount.isdigit() == False or int(betAmount) <= 0):
+		return ("FormatError", 0)
+	else:
+		betAmount = int(betAmount)
+	if currentMoney-betAmount <= 0:
+		return ("NotEnough",0)
+	elif betAmount > 500:
+		return ("TooMuch",0)
+	else:
+		return ("Success",betAmount)
