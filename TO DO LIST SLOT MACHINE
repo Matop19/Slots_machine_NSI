@@ -1,0 +1,27 @@
+# TO DO LIST FOR SLOT MACHINE
+# BUILD MAIN TO SWTICH FROM GAME TO GAME
+# BUILD MAIN FUNCTIONS (start, winning, losing, play again => symbols => 
+    Three cherries → 2x your bet
+    Three bells → 5x your bet
+    Three diamonds → 10x your bet
+    Three sevens → 20x your bet
+# ASCII CONSOLE WITH PRINT OF SYMBOLS + TEXT SIGNIFYING IT UNDER (associate lists of winning and losing patterns with ascii prints)
+# RANDOM WITH SEED + compare it with lists for each line (doable with conditions and loops)
+# refresh page + pay to play from player's tokens (player can be in debt before/during and after the game => kicked out after a certain amount in debt)
+# Make player's token not to be reset at the beginning of each game.
+
+
+#Game Flow overview 
+
+
+    The game starts by giving the player a starting balance (e.g., £100).
+    The player is asked how much they want to bet on the next spin.
+    The game checks if that bet is allowed (it must be more than £0 and not exceed the current balance).
+    The slot machine “spins” by randomly choosing one symbol per reel.
+    The three symbols are shown to the player.
+    The game checks if the symbols match (win condition).
+    If it’s a win, the player’s balance increases based on a predefined multiplier. (see earlier)
+    If it’s not, the bet amount is subtracted from their balance.
+    The player is asked if they want to continue playing or exit the game.
+    The loop continues until they leave or their balance reaches a certain amount in debt.
+
