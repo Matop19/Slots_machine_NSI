@@ -6,7 +6,7 @@ def GenerateNextXSlots(numberOfSlotsPerRow, numberOfRows):
 	for r in range(numberOfRows):
 		row = []
 		for s in range(numberOfSlotsPerRow):
-			symbol = random.randrange(0, 6)
+			symbol = random.randrange(0, len(vars.indexToSymbol))
 			row.append(symbol)
 		nextRows.append(tuple(row))
 	return nextRows
@@ -25,8 +25,10 @@ def BetCoins(betAmount, currentMoney):
 		return ("Success",betAmount)
 	
 def ConvertRawToSlots(rawList, lineIndex = 0):
-	print(rawList, chosenLine)
+	print(rawList, lineIndex)
 	#LIST IN FORMAT [(1,2,...), ...]
 	chosenLine = rawList[lineIndex]
-	for symbol in chosenLine:
-		print(symbol)
+	symbolTuple = []
+	for index in chosenLine:
+		symbolTuple.append(vars.indexToSymbol[index])
+	return tuple(symbolTuple)

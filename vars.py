@@ -5,3 +5,5 @@ money = 100
 numberOfSlotsPerRow = 3
 numberOfRows = 3
 nextTenSlotsRow = []
+
+indexToSymbol = ["Cherry","Bells","Diamonds","Lemon","Clover","Sevens"]
