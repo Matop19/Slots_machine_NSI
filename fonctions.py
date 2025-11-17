@@ -23,3 +23,10 @@ def BetCoins(betAmount, currentMoney):
 		return ("TooMuch",0)
 	else:
 		return ("Success",betAmount)
+	
+def ConvertRawToSlots(rawList, lineIndex = 0):
+	print(rawList, chosenLine)
+	#LIST IN FORMAT [(1,2,...), ...]
+	chosenLine = rawList[lineIndex]
+	for symbol in chosenLine:
+		print(symbol)
