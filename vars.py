@@ -7,5 +7,6 @@ numberOfRows = 3
 
 numberOfBoughtRows = 0
 nextSlotsRow = []
+nextSlotsRowSymbols = []
 
 indexToSymbol = ["Cherry","Bells","Diamonds","Lemon","Clover","Sevens"]

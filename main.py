@@ -21,11 +21,11 @@ print(f"You gambled {gambleAmount}, and now have {vars.money}")
 #endregion
 
 #region Slot Logic
-vars.seed = CreateRandomSeed()
+#vars.seed = CreateRandomSeed()
 vars.nextSlotsRow = GenerateNextXSlots(3,3)
 #A REMPLACER
 vars.numberOfBoughtRows = int(input("Cmb de lignes ?(max 3)"))
-print(ConvertRawToSlots(vars.nextSlotsRow,vars.numberOfBoughtRows))
+vars.nextSlotsRowSymbols = ConvertRawToSlots(vars.nextSlotsRow,vars.numberOfBoughtRows)
 #endregion
 
 #region INTERFACE GRAPHIQUE
