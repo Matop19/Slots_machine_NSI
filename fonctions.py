@@ -29,18 +29,13 @@ def BetCoins(betAmount, currentMoney):
 		return ("Success",betAmount)
 	
 def ConvertRawToSlots(rawList, numberOfLines=0):
-	print(rawList)
-	#LIST IN FORMAT [(1,2,...), ...]
-	# take the first n tuples
-	selected = rawList[:numberOfLines]
+    # take the first n tuples
+    selected = rawList[:numberOfLines]
 
-	# flatten them into a single list
-	result = []
-	for tup in selected:        # first loop: each tuple
-		for value in tup:       # second loop: each value in the tuple
-			result.append(value)
+    # convert values inside each tuple to symbols
+    result = []
+    for tup in selected:
+        new_tup = tuple(vars.indexToSymbol[value] for value in tup)
+        result.append(new_tup)
 
-	symbols = []
-	for index in result:
-		symbols.append(vars.indexToSymbol[index])
-	return symbols
+    return result
