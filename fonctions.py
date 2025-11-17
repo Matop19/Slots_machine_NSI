@@ -1,5 +1,9 @@
 import random
 import vars
+def CreateRandomSeed():
+	return random.randint(0,12345)
+
+
 def GenerateNextXSlots(numberOfSlotsPerRow, numberOfRows):
 	nextRows = []
 	random.seed(vars.seed)
