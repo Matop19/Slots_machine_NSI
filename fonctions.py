@@ -17,6 +17,8 @@ def GenerateNextXSlots(numberOfSlotsPerRow, numberOfRows):
 
 def BetCoins(betAmount, currentMoney):
 	#FORMAT : (STATUS,MONEYTOPAY)
+	if(betAmount.upper() == "LEAVE"):
+		return ("LEAVE",0)
 	if(betAmount.isdigit() == False or int(betAmount) <= 0):
 		return ("FormatError", 0)
 	else:
@@ -29,13 +31,13 @@ def BetCoins(betAmount, currentMoney):
 		return ("Success",betAmount)
 	
 def ConvertRawToSlots(rawList, numberOfLines=0):
-    # take the first n tuples
-    selected = rawList[:numberOfLines]
+	# take the first n tuples
+	selected = rawList[0:numberOfLines]
 
-    # convert values inside each tuple to symbols
-    result = []
-    for tup in selected:
-        new_tup = tuple(vars.indexToSymbol[value] for value in tup)
-        result.append(new_tup)
+	# convert values inside each tuple to symbols
+	result = []
+	for tup in selected:
+		new_tup = tuple(vars.indexToSymbol[value] for value in tup)
+		result.append(new_tup)
 
-    return result
+	return result

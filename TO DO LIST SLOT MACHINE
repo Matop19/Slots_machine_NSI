@@ -2,9 +2,11 @@
 # BUILD MAIN TO SWTICH FROM GAME TO GAME
 # BUILD MAIN FUNCTIONS (start, winning, losing, play again => symbols => 
     Three cherries → 2x your bet
+    Three lemons -> 2x your bet
     Three bells → 5x your bet
-    Three diamonds → 10x your bet
-    Three sevens → 20x your bet
+    Three clovers -> 10x your bet
+    Three diamonds → 20x your bet
+    Three sevens → 50x your bet
 # ASCII CONSOLE WITH PRINT OF SYMBOLS + TEXT SIGNIFYING IT UNDER (associate lists of winning and losing patterns with ascii prints)
 # RANDOM WITH SEED + compare it with lists for each line (doable with conditions and loops)
 # refresh page + pay to play from player's tokens (player can be in debt before/during and after the game => kicked out after a certain amount in debt)
