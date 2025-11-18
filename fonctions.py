@@ -41,14 +41,34 @@ def ConvertRawToSlots(rawList, numberOfLines=0):
 		result.append(new_tup)
 
 	return result
-def ShowSymbols(listSymbols):
-	for tuple in listSymbols:
-		for index in tuple:
-			symbol = vars.indexToSymbol[index]
-			with open(f"AsciiArtSymbols/{symbol}.txt",'r', encoding = "utf-8") as f:
-				print(f.read())
+def ShowSymbolTuple(_tuple, padding=5):
 
-ShowSymbols([(0,1,2),(3,4,5),(5,3,0)])
+	allSymbolsLines = []
+	for index in _tuple:
+		try:
+			symbol = vars.indexToSymbol[index]
+			with open(f'AsciiArtSymbols/{symbol}.txt', 'r', encoding='utf-8') as f:
+				lines = f.read().splitlines()
+				allSymbolsLines.append(lines)
+		except FileNotFoundError:
+			print(f"⚠️ Missing ASCII file for symbol: AsciiArtSymbols/{symbol}.txt")
+			return
+
+	# Equalize heights (so cards align properly)
+	max_height = max(len(c) for c in allSymbolsLines)
+	for c in allSymbolsLines:
+		while len(c) < max_height:
+			c.append(" " * len(c[0]))
+
+    # Print cards side by side
+	for line_group in zip(*allSymbolsLines):
+		print((" " * padding).join(line_group))
+				
+def ShowSymbols(symbolsList, padding=5):
+	for _tuple in symbolsList:
+		ShowSymbolTuple(_tuple, padding)
+
+ShowSymbols([(0,1,2),(3,4,5)])
 
 
 
