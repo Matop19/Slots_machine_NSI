@@ -10,5 +10,5 @@ numberOfBoughtRows = 0
 nextSlotsRow = []
 nextSlotsRowSymbols = []
 
-indexToSymbol = ["Cherry","Lemon","Bells","Clover","Diamond","Seven"]
+indexToSymbol = ["Cherry","Lemon","Bell","Clover","Diamond","Seven"]
 symbolMultiplier = [2,2,5,10,20,50]

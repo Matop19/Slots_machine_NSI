@@ -41,3 +41,19 @@ def ConvertRawToSlots(rawList, numberOfLines=0):
 		result.append(new_tup)
 
 	return result
+def ShowSymbols(listSymbols):
+	for tuple in listSymbols:
+		for index in tuple:
+			symbol = vars.indexToSymbol[index]
+			with open(f"AsciiArtSymbols/{symbol}.txt",'r', encoding = "utf-8") as f:
+				print(f.read())
+
+ShowSymbols([(0,1,2),(3,4,5),(5,3,0)])
+
+
+
+
+
+
+
+	

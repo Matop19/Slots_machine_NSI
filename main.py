@@ -40,7 +40,8 @@ def NewGame():
 	#endregion
 
 	#region INTERFACE GRAPHIQUE MATHIAS
-
+	vars.nextSlotsRowSymbols
+	open()
 	#endregion
 
 	#region CALCUL DU SCORE
