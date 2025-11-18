@@ -48,7 +48,9 @@ def ShowSymbols(listSymbols):
 			with open(f"AsciiArtSymbols/{symbol}.txt",'r', encoding = "utf-8") as f:
 				print(f.read())
 
-ShowSymbols([(0,1,2),(3,4,5),(5,3,0)])
+ShowSymbols(result)
+
+
 
 
 
