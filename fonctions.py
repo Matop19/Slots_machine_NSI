@@ -41,39 +41,53 @@ def ConvertRawToSlots(rawList, numberOfLines=0):
 		result.append(new_tup)
 
 	return result
-def ShowSymbolTuple(_tuple, padding=5):
+def ShowSymbols(list_of_tuples, padding=5):
+    # list_of_tuples is like: [(1,2,3), (4,5,6), (7,8,9)]
+    
+    # Load all ASCII arts into a structure:
+    # reels[i][j] = ASCII art (list of lines) for tuple i, symbol j
+    reels = []
 
-	allSymbolsLines = []
-	for index in _tuple:
-		try:
-			symbol = vars.indexToSymbol[index]
-			with open(f'AsciiArtSymbols/{symbol}.txt', 'r', encoding='utf-8') as f:
-				lines = f.read().splitlines()
-				allSymbolsLines.append(lines)
-		except FileNotFoundError:
-			print(f"⚠️ Missing ASCII file for symbol: AsciiArtSymbols/{symbol}.txt")
-			return
+    for tup in list_of_tuples:
+        reel_column = []
+        for index in tup:
+            symbol = vars.indexToSymbol[index]
+            with open(f'AsciiArtSymbols/{symbol}.txt', 'r', encoding='utf-8') as f:
+                lines = f.read().expandtabs(4).splitlines()
 
-	# Equalize heights (so cards align properly)
-	max_height = max(len(c) for c in allSymbolsLines)
-	for c in allSymbolsLines:
-		while len(c) < max_height:
-			c.append(" " * len(c[0]))
+            # Normalize width inside the symbol
+            max_width = max(len(line) for line in lines)
+            lines = [line.ljust(max_width) for line in lines]
 
-    # Print cards side by side
-	for line_group in zip(*allSymbolsLines):
-		print((" " * padding).join(line_group))
-				
-def ShowSymbols(symbolsList, padding=5):
-	for _tuple in symbolsList:
-		ShowSymbolTuple(_tuple, padding)
+            reel_column.append(lines)  # store symbol lines
 
-ShowSymbols([(0,1,2),(3,4,5)])
+        reels.append(reel_column)
 
+    # Each symbol has its own height; normalize all heights in each reel
+    for reel in reels:
+        # find maximum height among symbols in this reel
+        max_h = max(len(sym) for sym in reel)
+        for sym in reel:
+            width = len(sym[0])
+            while len(sym) < max_h:
+                sym.append(" " * width)
 
+    # Now print row by row:
+    # row 0: reels[0][0], reels[1][0], reels[2][0] ...
+    # row 1: reels[0][1], reels[1][1], reels[2][1] ...
+    # etc.
 
+    num_rows = len(reels[0])  # number of symbols per column
 
+    for row in range(num_rows):
+        # find max height of this row across all reels
+        row_height = max(len(reels[col][row]) for col in range(len(reels)))
 
+        # print this row line by line
+        for h in range(row_height):
+            line_parts = []
+            for col in range(len(reels)):
+                line_parts.append(reels[col][row][h])
+            print((" " * padding).join(line_parts))
 
-
-	
+        print()  # blank line between rows
