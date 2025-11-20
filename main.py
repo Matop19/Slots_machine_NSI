@@ -34,7 +34,7 @@ def NewGame():
 	vars.nextSlotsRow = GenerateNextXSlots(3,3)
 		#A REMPLACER
 		#vars.numberOfBoughtRows = int(input("Cmb de lignes ?(max 3)\n"))
-	vars.numberOfBoughtRows = 3
+	vars.numberOfBoughtRows = len(vars.nextSlotsRow)
 	vars.nextSlotsRowSymbols = ConvertRawToSlots(vars.nextSlotsRow,vars.numberOfBoughtRows)
 
 	#endregion
@@ -49,21 +49,20 @@ def NewGame():
 
 	#region CALCUL DU SCORE
 
-	# vars.nextSlotsRow is now a list of tuples (columns)
-	columns = vars.nextSlotsRow        # Example: [(3,5,7), (3,5,7), (3,5,7)]
+	columns = vars.nextSlotsRow        # list of tuples (each tuple = column in code)
 	num_cols = len(columns)
-	num_rows = len(columns[0])         # all columns have same height
+	num_rows = len(columns[0])         # number of elements in a column = screen rows
 
-	# We only check the number of rows the user has bought
-	rows_to_check = vars.numberOfBoughtRows
+	for r in range(num_rows):          # iterate over horizontal screen rows
+		# Build the horizontal row by taking the r-th element from each tuple
+		screen_row = [columns[c][r] for c in range(num_cols)]
 
-	for r in range(rows_to_check):
-		# Build the row from all columns
-		row = [columns[c][r] for c in range(num_cols)]
-
-		if row[0] == row[1] == row[2]:
-			symbol = row[0]
+		# Check if all symbols in the horizontal row are identical
+		if all(symbol == screen_row[0] for symbol in screen_row):
+			symbol = screen_row[0]
 			winnings = vars.gambleAmount * vars.symbolMultiplier[symbol]
+
+			# Print ASCII art
 			print(r''' .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. 
 | .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
 | |     _____    | || |      __      | || |     ______   | || |  ___  ____   | || |   ______     | || |     ____     | || |  _________   | |
@@ -75,17 +74,21 @@ def NewGame():
 | |              | || |              | || |              | || |              | || |              | || |              | || |              | |
 | '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |
  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' ''')
+
 			print(f"You won {vars.gambleAmount}x{vars.symbolMultiplier[symbol]} = ${winnings}")
 			vars.money += winnings
 
-
 	#endregion
+
 
 	# Wait for user to press a key
 	input("")
 
 	# Reset the game
 	NewGame()
+
+
+
 
 
 if __name__ == "__main__":

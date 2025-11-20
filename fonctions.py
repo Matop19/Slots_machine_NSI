@@ -19,7 +19,7 @@ def BetCoins(betAmount, currentMoney):
 	#FORMAT : (STATUS,MONEYTOPAY)
 	if(betAmount.upper() == "LEAVE"):
 		return ("LEAVE",0)
-	if(betAmount.isdigit() == False or int(betAmount) <= 0):
+	if(betAmount.isdigit() == False or int(betAmount) < 0):
 		return ("FormatError", 0)
 	else:
 		betAmount = int(betAmount)
@@ -42,10 +42,7 @@ def ConvertRawToSlots(rawList, numberOfLines=0):
 
 	return result
 def ShowSymbols(list_of_tuples, padding=5):
-    # list_of_tuples is like: [(1,2,3), (4,5,6), (7,8,9)]
-    
-    # Load all ASCII arts into a structure:
-    # reels[i][j] = ASCII art (list of lines) for tuple i, symbol j
+
     reels = []
 
     for tup in list_of_tuples:
@@ -55,7 +52,6 @@ def ShowSymbols(list_of_tuples, padding=5):
             with open(f'AsciiArtSymbols/{symbol}.txt', 'r', encoding='utf-8') as f:
                 lines = f.read().expandtabs(4).splitlines()
 
-            # Normalize width inside the symbol
             max_width = max(len(line) for line in lines)
             lines = [line.ljust(max_width) for line in lines]
 
@@ -63,16 +59,15 @@ def ShowSymbols(list_of_tuples, padding=5):
 
         reels.append(reel_column)
 
-    # Each symbol has its own height; normalize all heights in each reel
+
     for reel in reels:
-        # find maximum height among symbols in this reel
+
         max_h = max(len(sym) for sym in reel)
         for sym in reel:
             width = len(sym[0])
             while len(sym) < max_h:
                 sym.append(" " * width)
 
-    # Now print row by row:
     # row 0: reels[0][0], reels[1][0], reels[2][0] ...
     # row 1: reels[0][1], reels[1][1], reels[2][1] ...
     # etc.
@@ -80,10 +75,9 @@ def ShowSymbols(list_of_tuples, padding=5):
     num_rows = len(reels[0])  # number of symbols per column
 
     for row in range(num_rows):
-        # find max height of this row across all reels
+
         row_height = max(len(reels[col][row]) for col in range(len(reels)))
 
-        # print this row line by line
         for h in range(row_height):
             line_parts = []
             for col in range(len(reels)):
