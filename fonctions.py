@@ -19,11 +19,17 @@ def BetCoins(betAmount, currentMoney):
 	#FORMAT : (STATUS,MONEYTOPAY)
 	if(betAmount.upper() == "LEAVE"):
 		return ("LEAVE",0)
-	if(betAmount.isdigit() == False or int(betAmount) < 0):
+	if(betAmount == ""):
+		if(vars.previousBet == None):
+			return ("FormatError", 0)
+		else:
+			vars.gambleAmount = int(vars.previousBet)
+			return("Previous",int(vars.previousBet))
+	if(betAmount.isdigit() == False or int(betAmount) <= 0):
 		return ("FormatError", 0)
 	else:
 		betAmount = int(betAmount)
-	if currentMoney-betAmount <= 0:
+	if currentMoney-betAmount < 0:
 		return ("NotEnough",0)
 	elif betAmount > 500:
 		return ("TooMuch",0)

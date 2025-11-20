@@ -8,7 +8,7 @@ def NewGame():
 	os.system('cls' if os.name == 'nt' else 'clear')
 	#region GAMBLE
 	betCoins = ("None",0)
-	while betCoins[0]!="Success":
+	while betCoins[0]!="Success"and betCoins[0]!="Previous":
 		gambleAmount = input(f'''Entrez la quantité d'$ que vous souhaitez parier\nYou currently have ${vars.money}\nQuittez en entrant "LEAVE"\n''')
 		betCoins = BetCoins(gambleAmount, vars.money)
 
@@ -23,7 +23,8 @@ def NewGame():
 				print("You decide to leave.")
 				exit()
 	vars.money -= betCoins[1]
-	vars.gambleAmount = int(gambleAmount)
+	vars.gambleAmount = betCoins[1]
+	vars.previousBet = betCoins[1]
 	print(f"You gambled {vars.gambleAmount}, and now have {vars.money}")
 	sleep(1)
 	#endregion
@@ -40,7 +41,6 @@ def NewGame():
 	#endregion
 
 	#region INTERFACE GRAPHIQUE MATHIAS
-	print(vars.nextSlotsRow)
 	#Pas de symboles pcq utilisé comme index
 	ShowSymbols(vars.nextSlotsRow)
 
