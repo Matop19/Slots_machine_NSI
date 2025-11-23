@@ -82,7 +82,7 @@ def NewGame():
 
 
 	# Wait for user to press a key
-	input("")
+	input("Press any key to play again: ")
 
 	# Reset the game
 	NewGame()

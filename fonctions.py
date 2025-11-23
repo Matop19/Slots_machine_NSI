@@ -19,17 +19,11 @@ def BetCoins(betAmount, currentMoney):
 	#FORMAT : (STATUS,MONEYTOPAY)
 	if(betAmount.upper() == "LEAVE"):
 		return ("LEAVE",0)
-	if(betAmount == ""):
-		if(vars.previousBet == None):
-			return ("FormatError", 0)
-		else:
-			vars.gambleAmount = int(vars.previousBet)
-			return("Previous",int(vars.previousBet))
 	if(betAmount.isdigit() == False or int(betAmount) <= 0):
 		return ("FormatError", 0)
 	else:
 		betAmount = int(betAmount)
-	if currentMoney-betAmount < 0:
+	if currentMoney-betAmount <= 0:
 		return ("NotEnough",0)
 	elif betAmount > 500:
 		return ("TooMuch",0)
@@ -47,47 +41,57 @@ def ConvertRawToSlots(rawList, numberOfLines=0):
 		result.append(new_tup)
 
 	return result
-def ShowSymbols(list_of_tuples, padding=5):
 
-    reels = []
+def ShowSymbols(listSymbols):
+	for tuple in listSymbols:
+		for index in tuple:
+			symbol = vars.indexToSymbol[index]
+			with open(f"AsciiArtSymbols/{symbol}.txt",'r', encoding = "utf-8") as f:
+				print(f.read())
+				if vars.indexToSymbol[0] == vars.indexToSymbol[1] == vars.indexToSymbol[2] == symbol:
+					if symbol == "Bell":
+						vars.money+= vars.symbolMultiplier[2]
+						print("May the bells ring on your glory day! You have now: ", vars.money, "dollars!")
+						input("press any key to try again: ")
+					elif symbol == "Cherry":
+						vars.money+= vars.gambleAmount*vars.symbolMultiplier[0]
+						print("Cherries are always sweeter when they are in your favour! You have now:", vars.money, "dollars!")
+						input("press any key to try again: ")
+					elif symbol == "Lemon":
+						vars.money+= vars.gambleAmount*vars.symbolMultiplier[1]
+						print("Easy Peasy Lemon Squeezy! You have now:", vars.money,"dollars!")
+						input("press any key to try again: ")
+					elif symbol == "Clover":
+						vars.money+= vars.gambleAmount*vars.symbolMultiplier[3]
+						print("This is your lucky day!!! You have now:", vars.money,"dollars!")
+						input("press any key to try again: ")
+					elif symbol == 'Diamond':
+						vars.money+= vars.gambleAmount*vars.symbolMultiplier[4]
+						print("Shine on you crazy diamond!!! You have now:", vars.money,"dollars!")
+						input("press any key to try again: ")
+					elif symbol == 'Seven':
+						vars.money+= vars.gambleAmount*vars.symbolMultiplier[4]
+						print("I don't understand how a single number can make you so rich... You have now:", vars.money,"dollars!")
+						input("press any key to try again: ")
+				else:
+					print('Dang it...')
+					vars.money-= vars.gambleAmount
+					print("You have now: ",vars.money, "dollars")
+					input("press any key to try again: ")
 
-    for tup in list_of_tuples:
-        reel_column = []
-        for index in tup:
-            symbol = vars.indexToSymbol[index]
-            with open(f'AsciiArtSymbols/{symbol}.txt', 'r', encoding='utf-8') as f:
-                lines = f.read().expandtabs(4).splitlines()
 
-            max_width = max(len(line) for line in lines)
-            lines = [line.ljust(max_width) for line in lines]
+					
 
-            reel_column.append(lines)  # store symbol lines
-
-        reels.append(reel_column)
+ShowSymbols()
 
 
-    for reel in reels:
 
-        max_h = max(len(sym) for sym in reel)
-        for sym in reel:
-            width = len(sym[0])
-            while len(sym) < max_h:
-                sym.append(" " * width)
 
-    # row 0: reels[0][0], reels[1][0], reels[2][0] ...
-    # row 1: reels[0][1], reels[1][1], reels[2][1] ...
-    # etc.
 
-    num_rows = len(reels[0])  # number of symbols per column
 
-    for row in range(num_rows):
 
-        row_height = max(len(reels[col][row]) for col in range(len(reels)))
 
-        for h in range(row_height):
-            line_parts = []
-            for col in range(len(reels)):
-                line_parts.append(reels[col][row][h])
-            print((" " * padding).join(line_parts))
 
-        print()  # blank line between rows
+
+
+	
