@@ -24,9 +24,9 @@ def BetCoins(betAmount, currentMoney):
 			return ("FormatError", 0)
 		else:
 			vars.gambleAmount = int(vars.previousBet)
-			if currentMoney-betAmount < 0:
+			if currentMoney-int(vars.previousBet) < 0:
 				return ("NotEnough",0)
-			elif betAmount > 500:
+			elif int(vars.previousBet) > 500:
 				return ("TooMuch",0)
 			else:
 				return("Previous",int(vars.previousBet))
