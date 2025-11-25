@@ -48,36 +48,7 @@ def ShowSymbols(listSymbols):
 			symbol = vars.indexToSymbol[index]
 			with open(f"AsciiArtSymbols/{symbol}.txt",'r', encoding = "utf-8") as f:
 				print(f.read())
-				if vars.indexToSymbol[0] == vars.indexToSymbol[1] == vars.indexToSymbol[2] == symbol:
-					if symbol == "Bell":
-						vars.money+= vars.symbolMultiplier[2]
-						print("May the bells ring on your glory day! You have now: ", vars.money, "dollars!")
-						input("press any key to try again: ")
-					elif symbol == "Cherry":
-						vars.money+= vars.gambleAmount*vars.symbolMultiplier[0]
-						print("Cherries are always sweeter when they are in your favour! You have now:", vars.money, "dollars!")
-						input("press any key to try again: ")
-					elif symbol == "Lemon":
-						vars.money+= vars.gambleAmount*vars.symbolMultiplier[1]
-						print("Easy Peasy Lemon Squeezy! You have now:", vars.money,"dollars!")
-						input("press any key to try again: ")
-					elif symbol == "Clover":
-						vars.money+= vars.gambleAmount*vars.symbolMultiplier[3]
-						print("This is your lucky day!!! You have now:", vars.money,"dollars!")
-						input("press any key to try again: ")
-					elif symbol == 'Diamond':
-						vars.money+= vars.gambleAmount*vars.symbolMultiplier[4]
-						print("Shine on you crazy diamond!!! You have now:", vars.money,"dollars!")
-						input("press any key to try again: ")
-					elif symbol == 'Seven':
-						vars.money+= vars.gambleAmount*vars.symbolMultiplier[4]
-						print("I don't understand how a single number can make you so rich... You have now:", vars.money,"dollars!")
-						input("press any key to try again: ")
-				else:
-					print('Dang it...')
-					vars.money-= vars.gambleAmount
-					print("You have now: ",vars.money, "dollars")
-					input("press any key to try again: ")
+				
 
 
 					
