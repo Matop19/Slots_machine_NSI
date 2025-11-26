@@ -33,7 +33,7 @@ def NewGame():
 	#region GAMBLE
 	betCoins = ("None",0)
 	while betCoins[0]!="Success"and betCoins[0]!="Previous":
-		gambleAmount = input(f'''Enter $ amount that you want to bet!\nYou currently have ${vars.money}\nLeave by typing "LEAVE"\n''')
+		gambleAmount = input(f'''Enter the $ amount that you want to bet!\nYou currently have ${vars.money}\nLeave by typing "LEAVE"\n''')
 		betCoins = BetCoins(gambleAmount, vars.money)
 
 		match betCoins[0]:
