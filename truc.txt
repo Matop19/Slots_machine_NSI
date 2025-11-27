@@ -1,0 +1,14 @@
+    if balls_num is not None:
+        if balls_num.isdigit():
+            num = int(balls_num)
+            if 1 <= num <= 20:
+                return num
+            else:
+                print("\nBetween 1 and 20 I said.")
+                return ball_number()
+        else:
+            print('\nYou can only split with full balls.')
+            return ball_number()
+    else:
+        print('Excuse me, it seems there is a problem. Would you mind try again?')
+        return ball_number()
